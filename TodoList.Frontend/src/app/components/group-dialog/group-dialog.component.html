@@ -1,0 +1,11 @@
+<h1 mat-dialog-title>Creating group</h1>
+<div mat-dialog-content>
+  <p>Enter group name</p>
+  <mat-form-field appearance="fill">
+    <mat-label>group name</mat-label>
+    <input matInput [(ngModel)]="groupName">
+  </mat-form-field>
+</div>
+<div mat-dialog-actions>
+  <button mat-button cdkFocusInitial [mat-dialog-close]="groupName">Create</button>
+</div>

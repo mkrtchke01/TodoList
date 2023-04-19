@@ -1,24 +1,43 @@
-﻿namespace TodoList.Mobile;
+﻿using TodoList.Mobile.DataServices;
+using TodoList.Mobile.Models;
+using TodoList.Mobile.Pages;
+
+namespace TodoList.Mobile;
 
 public partial class MainPage : ContentPage
 {
-	int count = 0;
+    private readonly IRestDataService _restDataService;
 
-	public MainPage()
-	{
-		InitializeComponent();
-	}
+    public MainPage(IRestDataService restDataService)
+    {
+        InitializeComponent();
+        _restDataService = restDataService;
+    }
 
-	private void OnCounterClicked(object sender, EventArgs e)
-	{
-		count++;
 
-		if (count == 1)
-			CounterBtn.Text = $"Clicked {count} time";
-		else
-			CounterBtn.Text = $"Clicked {count} times";
+    protected override async void OnAppearing()
+    {
+        base.OnAppearing();
+        collectionView.ItemsSource = await _restDataService.GetAllGroupsAsync();
+    }
 
-		SemanticScreenReader.Announce(CounterBtn.Text);
-	}
+    private async void OnAddGroupClicked(object sender, EventArgs e)
+    {
+        var navigationParameter = new Dictionary<string, object>
+        {
+            {
+                nameof(Group), new Group()
+            }
+        };
+        await Shell.Current.GoToAsync(nameof(CreateGroupPage), navigationParameter);
+    }
+
+    private async void OnSelectionChanged(object sender, SelectionChangedEventArgs e)
+    {
+        var navigationParameter = new Dictionary<string, object>
+        {
+            { nameof(Group), e.CurrentSelection.FirstOrDefault() as Group }
+        };
+        await Shell.Current.GoToAsync(nameof(GetTodosPage), navigationParameter);
+    }
 }
-

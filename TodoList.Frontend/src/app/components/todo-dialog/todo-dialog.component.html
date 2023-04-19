@@ -1,0 +1,11 @@
+<h1 mat-dialog-title>Creating todo</h1>
+<div mat-dialog-content>
+  <p>Enter todo name</p>
+  <mat-form-field appearance="fill">
+    <mat-label>todo name</mat-label>
+    <input matInput [(ngModel)]="todoName">
+  </mat-form-field>
+</div>
+<div mat-dialog-actions>
+  <button mat-button cdkFocusInitial [mat-dialog-close]="todoName">Create</button>
+</div>

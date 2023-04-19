@@ -1,0 +1,59 @@
+<div class="container mt-3">
+            <div style="cursor: pointer;" class="m-1" (click)="getTodoList(group.GroupId)" *ngFor="let group of groups">
+                <mat-accordion hideToggle>
+                    <mat-expansion-panel
+                    [expanded]="group.GroupId === currentOpenedItemId"
+                    (opened)="handleOpened(group)">
+                      <mat-expansion-panel-header>
+                        <mat-panel-title>
+                            <h1>{{group.GroupId}}</h1>
+                        </mat-panel-title>
+                        <mat-panel-description>
+                            <h1 >{{group.GroupName}}</h1>
+                        </mat-panel-description>
+                        <div (click)="deleteGroup(group.GroupId)">
+                            <mat-icon>delete</mat-icon>
+                        </div>
+                      </mat-expansion-panel-header>
+                      <div class="container" *ngFor="let todo of todoList">
+                        <div class="row">
+                            <mat-checkbox class="col-2" [(ngModel)]="todo.IsCompleted" (change)="changeStatus(todo.TodoId, todo, group.GroupId)">{{todo.TodoName}}</mat-checkbox>
+                            <div class="col-6" (click)="deleteTodo(todo.TodoId, group.GroupId)">
+                                <mat-icon>delete</mat-icon>
+                            </div>
+                        </div>
+                      </div>
+                      <div (click)="openTodoDialog(group.GroupId)">
+                          <mat-icon>add</mat-icon>
+                      </div>
+                    </mat-expansion-panel>
+                </mat-accordion>
+      </div>
+      <div class="text-center">
+        <button (click)="openGroupDialog()" class="mt-2 text-center" mat-flat-button color="primary">
+            Create group
+        </button>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

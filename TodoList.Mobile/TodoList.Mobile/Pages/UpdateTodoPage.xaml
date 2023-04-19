@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="TodoList.Mobile.Pages.UpdateTodoPage"
+             Title="{Binding Path=Todo.TodoName}">
+    <VerticalStackLayout>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+            <Button Margin="20" Grid.Column="0" Text="Delete" Clicked="OnDeleteTodoClicked"></Button>
+            <Button Margin="20" Grid.Column="101" Text="Change status" Clicked="OnChangeStatusTodoClicked"></Button>
+        </Grid>
+    </VerticalStackLayout>
+</ContentPage>
